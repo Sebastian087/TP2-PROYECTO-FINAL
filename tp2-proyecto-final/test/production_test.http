@@ -1,0 +1,69 @@
+###Test de la Api en Render
+
+### Variables de entorno para producción
+@baseUrl = https://tp2-proyecto-final.onrender.com/api/reserva
+@auth = Basic YWRtaW46YWRtaW4xMjM=
+
+
+### Obtener todas las reservas
+GET {{baseUrl}}
+Authorization: {{auth}}
+
+### Obtener una reserva por ID
+GET {{baseUrl}}/6
+Authorization: {{auth}}
+
+### Crear una nueva reserva
+POST {{baseUrl}}
+Authorization: {{auth}}
+Content-Type: application/json
+
+{
+  "nombre": "Test Producción",
+  "apellido": "Usuario",
+  "dia": "2024-12-25",
+  "sector": "interior",
+  "motivo": "Prueba de despliegue en Render"
+}
+
+### Crear otra reserva
+POST {{baseUrl}}
+Authorization: {{auth}}
+Content-Type: application/json
+
+{
+  "nombre": "María",
+  "apellido": "González",
+  "dia": "2024-12-26",
+  "sector": "exterior",
+  "motivo": "Reunión de trabajo"
+}
+
+### Actualizar una reserva
+PUT {{baseUrl}}/15
+Authorization: {{auth}}
+Content-Type: application/json
+
+{
+  "nombre": "Juan Carlos",
+  "apellido": "Pérez",
+  "dia": "2024-12-27",
+  "sector": "exterior",
+  "motivo": "Cena de aniversario actualizada"
+}
+
+### Obtener estadísticas
+GET {{baseUrl}}/estadisticas
+Authorization: {{auth}}
+
+### Exportar reservas a CSV
+GET {{baseUrl}}/exportar
+Authorization: {{auth}}
+
+### Eliminar una reserva (cuidado en producción)
+DELETE {{baseUrl}}/1
+Authorization: {{auth}}
+
+### Eliminar todas las reservas (solo en entorno de testing)
+DELETE {{baseUrl}}/all
+Authorization: {{auth}} 

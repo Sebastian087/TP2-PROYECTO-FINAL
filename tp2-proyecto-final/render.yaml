@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: sistema-reservas-api
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node src/server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: HOST
+        value: 0.0.0.0
+      - key: ENABLE_LOGS
+        value: true
+      - key: BASIC_AUTH_USER
+        value: admin
+      - key: BASIC_AUTH_PASS
+        value: admin123
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_KEY
+        sync: false 

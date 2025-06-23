@@ -1,0 +1,68 @@
+###En caso que se quiera probar de manera local.
+
+### Variables de entorno
+@baseUrl = http://localhost:3000/api/reserva
+@auth = Basic YWRtaW46YWRtaW4xMjM=
+
+### Obtener todas las reservas
+GET {{baseUrl}}
+Authorization: {{auth}}
+
+### Obtener una reserva por ID
+GET {{baseUrl}}/5
+Authorization: {{auth}}
+
+### Crear una nueva reserva
+POST {{baseUrl}}
+Authorization: {{auth}}
+Content-Type: application/json
+
+{
+  "nombre": "Juan Carlos",
+  "apellido": "Pérez",
+  "dia": "2024-01-20",
+  "sector": "interior",
+  "motivo": "Cena de aniversario"
+}
+
+### Crear otra reserva
+POST {{baseUrl}}
+Authorization: {{auth}}
+Content-Type: application/json
+
+{
+  "nombre": "María",
+  "apellido": "González",
+  "dia": "2024-01-16",
+  "sector": "exterior",
+  "motivo": "Reunión de trabajo"
+}
+
+### Actualizar una reserva
+PUT {{baseUrl}}/1
+Authorization: {{auth}}
+Content-Type: application/json
+
+{
+  "nombre": "Juan Carlos",
+  "apellido": "Pérez",
+  "dia": "2024-01-20",
+  "sector": "exterior",
+  "motivo": "Cena de aniversario"
+}
+
+### Eliminar una reserva
+DELETE {{baseUrl}}/1
+Authorization: {{auth}}
+
+### Obtener estadísticas
+GET {{baseUrl}}/estadisticas
+Authorization: {{auth}}
+
+### Exportar reservas a CSV
+GET {{baseUrl}}/exportar
+Authorization: {{auth}}
+
+### Eliminar todas las reservas (solo en entorno de testing)
+DELETE {{baseUrl}}/all
+Authorization: {{auth}} 
