@@ -98,7 +98,7 @@ Mide la duración de cada request y guarda un log en Supabase (tabla `logs`).
 
 ---
 
-## 🔮 Testing Manual (`tests/reservas.http`)
+## 🔮 Testing Manual (`tests/reservas.http`) Tambien posee Despliegue en Render !!
 
 Se provee un archivo `.http` para realizar peticiones de prueba:
 
@@ -112,35 +112,9 @@ Se provee un archivo `.http` para realizar peticiones de prueba:
 
 ---
 
-## 🚀 Despliegue en Render
-
-### Configuración Automática
-
-El proyecto incluye `render.yaml` para despliegue automático en Render:
-
-1. **Conecta tu repositorio** a Render
-2. **Render detectará automáticamente** la configuración
-3. **Configura las variables de entorno**:
-   ```env
-   NODE_ENV=production
-   PORT=10000
-   HOST=0.0.0.0
-   ENABLE_LOGS=true
-   BASIC_AUTH_USER=admin
-   BASIC_AUTH_PASS=admin123
-   SUPABASE_URL=https://uwcdyxeoaxsmpnxkcavd.supabase.co
-   SUPABASE_KEY=tu_anon_key_de_supabase
-   ```
-
 ### Testing en Producción
 
-Usa `test/production_test.http` para probar el despliegue:
-
-```bash
-# Ejemplo de petición a producción
-curl -X GET https://tu-app.onrender.com/api/reserva \
-  -H "Authorization: Basic YWRtaW46YWRtaW4xMjM="
-```
+Usa `test/production_test.http` para probar el despliegue
 
 ## 🔹 Consideraciones Finales
 
