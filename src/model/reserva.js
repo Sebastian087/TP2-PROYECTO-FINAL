@@ -1,4 +1,3 @@
-//Disclaimer: Encontramos esta forma de documentar en ChatGPt, y nos pareció que estaba bueno.
 //Esta clase ya no está siendo obligatoria/necesaria, pero la dejamos como documentación de la clase Reserva que existe en la DB.
 
 /**

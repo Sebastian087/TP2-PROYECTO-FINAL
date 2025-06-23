@@ -79,7 +79,7 @@ export const ReservaService = {
     if (!reservas || reservas.length === 0) return null;
 
     const fields = ["id", "nombre", "apellido", "dia", "sector", "motivo"];
-    const { Parser } = await import("json2csv"); // import dinámico porque estás en módulo ES
+    const { Parser } = await import("json2csv");
     const fs = await import("fs/promises");
 
     const json2csv = new Parser({ fields });

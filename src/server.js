@@ -14,7 +14,7 @@ app.use(
   morgan(":method :url :status :res[content-length] - :response-time ms")
 );
 
-// Body parser
+
 app.use(express.json());
 app.use(express.static("public"));
 

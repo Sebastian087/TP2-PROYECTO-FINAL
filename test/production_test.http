@@ -61,7 +61,7 @@ GET {{baseUrl}}/exportar
 Authorization: {{auth}}
 
 ### Eliminar una reserva (cuidado en producción)
-DELETE {{baseUrl}}/1
+DELETE {{baseUrl}}/15
 Authorization: {{auth}}
 
 ### Eliminar todas las reservas (solo en entorno de testing)

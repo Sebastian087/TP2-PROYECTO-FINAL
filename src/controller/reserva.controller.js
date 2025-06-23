@@ -1,11 +1,9 @@
 import { ReservaService } from "../services/reserva.service.js";
-// Importamos módulos necesarios para manejar rutas de archivos
-import path from "path"; // Para resolver rutas de archivos
-import { fileURLToPath } from "url"; // Para obtener la URL del archivo actual
+import path from "path";
+import { fileURLToPath } from "url"; 
 
-// Estas dos líneas nos permiten usar __dirname en módulos ES (import/export)
-const __filename = fileURLToPath(import.meta.url); // Obtiene la ruta completa del archivo actual
-const __dirname = path.dirname(__filename); // Extrae el directorio base a partir de esa ruta
+const __filename = fileURLToPath(import.meta.url); 
+const __dirname = path.dirname(__filename);
 
 
 
