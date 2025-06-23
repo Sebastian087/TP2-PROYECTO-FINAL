@@ -11,7 +11,7 @@ export const LogRepository = {
       console.log("📝 Intentando guardar log:", { method, url, status_code, response_time });
       
       const { data, error } = await supabase
-        .from("request_logs")
+        .from("logs")
         .insert([
           { method, url, status_code, response_time },
         ]);
