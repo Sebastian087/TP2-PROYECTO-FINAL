@@ -51,7 +51,7 @@ export const ReservaController = {
     }
 
     res.status(200).json({
-      message: "Success",
+      message: "Estas son todas las reservas",
       payload: reservas,
       ok: true,
     });
@@ -72,7 +72,7 @@ export const ReservaController = {
     }
 
     res.status(200).json({
-      message: "Success",
+      message: "Reserva encontrada",
       payload: reserva,
       ok: true,
     });
@@ -127,7 +127,7 @@ export const ReservaController = {
     return;
   },
 
-getEstadisticas: async (req, res) => {
+  getEstadisticas: async (req, res) => {
     try {
       const estadisticas = await ReservaService.getEstadisticas();
       res.status(200).json(estadisticas);
@@ -163,7 +163,8 @@ getEstadisticas: async (req, res) => {
       return;
     }
   },
-    deleteAllReservas: async (req, res) => {
+
+  deleteAllReservas: async (req, res) => {
     if (process.env.NODE_ENV !== "test") {
       return res.status(403).json({
         ok: false,
@@ -190,6 +191,32 @@ getEstadisticas: async (req, res) => {
     }
   },
 
+  getLastLogs: async (req, res) => {
+    try {
+      const limit = parseInt(req.query.limit) || 5;
+      const logs = await ReservaService.getLastLogs(limit);
 
+      if (!logs) {
+        res.status(404).json({
+          message: "No se encontraron logs",
+          payload: null,
+          ok: false,
+        });
+        return;
+      }
 
+      res.status(200).json({
+        message: `Últimos ${logs.length} logs obtenidos exitosamente`,
+        payload: logs,
+        ok: true,
+      });
+    } catch (error) {
+      console.error("Error al obtener logs:", error);
+      res.status(500).json({
+        message: "Error interno al obtener logs",
+        payload: null,
+        ok: false,
+      });
+    }
+  },
 }; 

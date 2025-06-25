@@ -10,7 +10,7 @@ reservaRouter.use(basicAuth); //Aca estoy implementando la basicAuth para todas 
 reservaRouter.delete("/all", ReservaController.deleteAllReservas);
 reservaRouter.get("/estadisticas", ReservaController.getEstadisticas);
 reservaRouter.get("/exportar", ReservaController.reservaExportar);
-
+reservaRouter.get("/logs", ReservaController.getLastLogs);
 
 // CRUD de reservas
 reservaRouter.get("/", ReservaController.reservaGetAll);
@@ -18,6 +18,5 @@ reservaRouter.get("/:id", ReservaController.reservaGetById);
 reservaRouter.post("/", ReservaController.reservaCreateOne);
 reservaRouter.put("/:id", ReservaController.reservaUpdateById);
 reservaRouter.delete("/:id", ReservaController.reservaDeleteOne);
-
 
 export { reservaRouter }; 

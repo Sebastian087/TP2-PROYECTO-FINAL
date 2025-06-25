@@ -1,5 +1,6 @@
 import { Reserva } from "../model/reserva.js";
 import { ReservaRepository } from "../repository/reserva.repository.js";
+import { LogRepository } from "../repository/log.repository.js";
 
 
 export const ReservaService = {
@@ -93,5 +94,13 @@ export const ReservaService = {
 
     deleteAll: async () => {
     return await ReservaRepository.deleteAll();
+  },
+
+  getLastLogs: async (limit = 5) => {
+    const logs = await LogRepository.getLastLogs(limit);
+    
+    if (!logs) return null;
+    
+    return logs;
   },
 }; 

@@ -1,0 +1,48 @@
+### Test del Sistema de Logs
+
+### Variables de entorno para producción
+@baseUrl = https://tp2-proyecto-final.onrender.com/api/reserva
+@auth = Basic YWRtaW46YWRtaW4xMjM=
+
+### Variables de entorno para local
+@localBaseUrl = http://localhost:3000/api/reserva
+@localAuth = Basic YWRtaW46YWRtaW4xMjM=
+
+### ========================================
+### PRUEBAS DE LOGS - PRODUCCIÓN
+### ========================================
+
+### Obtener los últimos 5 logs (por defecto)
+GET {{baseUrl}}/logs
+Authorization: {{auth}}
+
+### Obtener los últimos 10 logs
+GET {{baseUrl}}/logs?limit=10
+Authorization: {{auth}}
+
+### Obtener los últimos 3 logs
+GET {{baseUrl}}/logs?limit=3
+Authorization: {{auth}}
+
+### ========================================
+### PRUEBAS DE LOGS - LOCAL
+### ========================================
+
+### Obtener los últimos 5 logs (local)
+GET {{localBaseUrl}}/logs
+Authorization: {{localAuth}}
+
+### Obtener los últimos 10 logs (local)
+GET {{localBaseUrl}}/logs?limit=10
+Authorization: {{localAuth}}
+
+### Obtener los últimos 3 logs (local)
+GET {{localBaseUrl}}/logs?limit=3
+Authorization: {{localAuth}}
+
+### ========================================
+### PRUEBAS DE ERROR
+### ========================================
+
+### Intentar obtener logs sin autenticación
+GET {{baseUrl}}/logs
