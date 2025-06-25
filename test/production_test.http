@@ -64,6 +64,6 @@ Authorization: {{auth}}
 DELETE {{baseUrl}}/15
 Authorization: {{auth}}
 
-### Eliminar todas las reservas (solo en entorno de testing)
+### Eliminar todas las reservas (solo en entorno de testing local)
 DELETE {{baseUrl}}/all
 Authorization: {{auth}} 
