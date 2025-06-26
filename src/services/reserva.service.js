@@ -2,7 +2,6 @@ import { Reserva } from "../model/reserva.js";
 import { ReservaRepository } from "../repository/reserva.repository.js";
 import { LogRepository } from "../repository/log.repository.js";
 
-
 export const ReservaService = {
   serviceReservaValidation: async (id) => {
     const codigoReserva = await ReservaRepository.getById(id);
@@ -37,12 +36,20 @@ export const ReservaService = {
 
     return created;
   },
+
   serviceReservaDelete: async (id) => {
     const idReserva = await ReservaRepository.deleteById(id);
     if (!idReserva) return null;
     return idReserva;
   },
+
   serviceUpdateReserva: async (id, newData) => {
+    // Primero verificar si la reserva existe
+    const reservaExistente = await ReservaRepository.getById(id);
+    if (!reservaExistente) {
+      return null; // La reserva no existe
+    }
+
     const reservaActualizado = await ReservaRepository.updateById(
       id,
       newData
@@ -50,6 +57,7 @@ export const ReservaService = {
     if (!reservaActualizado) return null;
     return reservaActualizado;
   },
+
   // Este método obtiene estadísticas de las reservas
   // como el total de reservas, la cantidad por sector y la cantidad por día.
    getEstadisticas: async () => {

@@ -16,7 +16,7 @@ export const ReservaController = {
       if (!response) {
         res.status(400).json({
           payload: null,
-          message: "Datos inválidos o error al crear la reserva",
+          message: "Error al crear la reserva",
           ok: false,
         });
         return;
@@ -105,26 +105,35 @@ export const ReservaController = {
     const { id } = req.params;
     const newData = req.body;
 
-    const reservaUpdated = await ReservaService.serviceUpdateReserva(
-      id,
-      newData
-    );
+    try {
+      const reservaUpdated = await ReservaService.serviceUpdateReserva(
+        id,
+        newData
+      );
 
-    if (!reservaUpdated) {
-      res.status(404).json({
-        ok: false,
-        payload: null,
-        message: "Fallo al actualizar la reserva",
+      if (!reservaUpdated) {
+        res.status(404).json({
+          ok: false,
+          payload: null,
+          message: "Fallo al actualizar la reserva",
+        });
+        return;
+      }
+
+      res.status(200).json({
+        message: `Reserva modificada`,
+        payload: reservaUpdated,
+        ok: true,
       });
       return;
+    } catch (e) {
+      console.error(e);
+      res.status(500).json({
+        payload: null,
+        message: "Error inesperado al actualizar la reserva",
+        ok: false,
+      });
     }
-
-    res.status(200).json({
-      message: `Reserva modificada`,
-      payload: reservaUpdated,
-      ok: true,
-    });
-    return;
   },
 
   getEstadisticas: async (req, res) => {

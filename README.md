@@ -98,7 +98,7 @@ Mide la duración de cada request y guarda un log en Supabase (tabla `logs`).
 
 ---
 
-## 🔮 Testing Manual (`tests/reservas.http`) Tambien posee Despliegue en Render !!
+## Testing Manual (`tests/reservas.http`) Tambien posee Despliegue en Render !!
 
 Se provee un archivo `.http` para realizar peticiones de prueba:
 

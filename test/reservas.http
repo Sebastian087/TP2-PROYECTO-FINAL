@@ -4,12 +4,16 @@
 @baseUrl = http://localhost:3000/api/reserva
 @auth = Basic YWRtaW46YWRtaW4xMjM=
 
+### ========================================
+### CASOS FELICES (FUNCIONALIDAD NORMAL)
+### ========================================
+
 ### Obtener todas las reservas
 GET {{baseUrl}}
 Authorization: {{auth}}
 
 ### Obtener una reserva por ID
-GET {{baseUrl}}/5
+GET {{baseUrl}}/20
 Authorization: {{auth}}
 
 ### Crear una nueva reserva
@@ -20,7 +24,7 @@ Content-Type: application/json
 {
   "nombre": "Juan Carlos",
   "apellido": "Pérez",
-  "dia": "2024-01-20",
+  "dia": "2025-10-20",
   "sector": "interior",
   "motivo": "Cena de aniversario"
 }
@@ -33,20 +37,20 @@ Content-Type: application/json
 {
   "nombre": "María",
   "apellido": "González",
-  "dia": "2024-01-16",
+  "dia": "2026-01-16",
   "sector": "exterior",
   "motivo": "Reunión de trabajo"
 }
 
 ### Actualizar una reserva
-PUT {{baseUrl}}/1
+PUT {{baseUrl}}/20
 Authorization: {{auth}}
 Content-Type: application/json
 
 {
   "nombre": "Juan Carlos",
   "apellido": "Pérez",
-  "dia": "2024-01-20",
+  "dia": "2026-01-20",
   "sector": "exterior",
   "motivo": "Cena de aniversario"
 }
@@ -65,4 +69,259 @@ Authorization: {{auth}}
 
 ### Eliminar todas las reservas (solo en entorno de testing)
 DELETE {{baseUrl}}/all
-Authorization: {{auth}} 
+Authorization: {{auth}}
+
+### ========================================
+###       CASOS NO FELICES (ERRORES)
+### ========================================
+
+### ========================================
+### ERRORES DE AUTENTICACIÓN
+### ========================================
+
+### Intentar acceder sin autenticación
+GET {{baseUrl}}
+
+### Intentar acceder con credenciales incorrectas
+GET {{baseUrl}}
+Authorization: Basic dXNlcjpwYXNz
+
+### Intentar acceder con formato de autenticación incorrecto
+GET {{baseUrl}}
+Authorization: YWRtaW46YWRtaW4xMjM=
+
+### ========================================
+### ERRORES DE DATOS FALTANTES
+### ========================================
+
+### Crear reserva sin nombre
+POST {{baseUrl}}
+Authorization: {{auth}}
+Content-Type: application/json
+
+{
+  "apellido": "Pérez",
+  "dia": "2024-01-20",
+  "sector": "interior",
+  "motivo": "Cena de aniversario"
+}
+
+### Crear reserva sin apellido
+POST {{baseUrl}}
+Authorization: {{auth}}
+Content-Type: application/json
+
+{
+  "nombre": "Juan",
+  "dia": "2025-08-20",
+  "sector": "interior",
+  "motivo": "Cena de aniversario"
+}
+
+### Crear reserva sin sector
+POST {{baseUrl}}
+Authorization: {{auth}}
+Content-Type: application/json
+
+{
+  "nombre": "Juan",
+  "apellido": "Pérez",
+  "dia": "2025-08-20",
+  "motivo": "Cena de aniversario"
+}
+
+
+### Crear reserva con datos vacíos
+POST {{baseUrl}}
+Authorization: {{auth}}
+Content-Type: application/json
+
+{
+  "nombre": "",
+  "apellido": "",
+  "dia": "",
+  "sector": "",
+  "motivo": ""
+}
+
+### ========================================
+### ERRORES DE DATOS INVÁLIDOS
+### ========================================
+
+### Crear reserva con sector inválido
+POST {{baseUrl}}
+Authorization: {{auth}}
+Content-Type: application/json
+
+{
+  "nombre": "Juan",
+  "apellido": "Pérez",
+  "dia": "2024-01-20",
+  "sector": "terraza",
+  "motivo": "Cena de aniversario"
+}
+
+### Crear reserva con fecha inválida
+POST {{baseUrl}}
+Authorization: {{auth}}
+Content-Type: application/json
+
+{
+  "nombre": "Juan",
+  "apellido": "Pérez",
+  "dia": "fecha-invalida",
+  "sector": "interior",
+  "motivo": "Cena de aniversario"
+}
+
+### Crear reserva con fecha en el pasado
+POST {{baseUrl}}
+Authorization: {{auth}}
+Content-Type: application/json
+
+{
+  "nombre": "Juan",
+  "apellido": "Pérez",
+  "dia": "2020-01-01",
+  "sector": "interior",
+  "motivo": "Cena de aniversario"
+}
+
+### Crear reserva con fecha pasada 
+POST {{baseUrl}}
+Authorization: {{auth}}
+Content-Type: application/json
+
+{
+  "nombre": "Juan",
+  "apellido": "Pérez",
+  "dia": "2020-01-01",
+  "sector": "interior",
+  "motivo": "Cena de aniversario"
+}
+
+### Crear reserva con fecha de ayer 
+POST {{baseUrl}}
+Authorization: {{auth}}
+Content-Type: application/json
+
+{
+  "nombre": "María",
+  "apellido": "García",
+  "dia": "{{$datetime 'YYYY-MM-DD' -1 d}}",
+  "sector": "exterior",
+  "motivo": "Almuerzo de trabajo"
+}
+
+### Crear reserva con fecha futura 
+POST {{baseUrl}}
+Authorization: {{auth}}
+Content-Type: application/json
+
+{
+  "nombre": "Carlos",
+  "apellido": "López",
+  "dia": "{{$datetime 'YYYY-MM-DD' +1 d}}",
+  "sector": "interior",
+  "motivo": "Cena familiar"
+}
+
+### Crear reserva con fecha de hoy 
+POST {{baseUrl}}
+Authorization: {{auth}}
+Content-Type: application/json
+
+{
+  "nombre": "Ana",
+  "apellido": "Martínez",
+  "dia": "{{$datetime 'YYYY-MM-DD'}}",
+  "sector": "exterior",
+  "motivo": "Almuerzo con amigos"
+}
+
+### Crear reserva con formato de fecha inválido 
+POST {{baseUrl}}
+Authorization: {{auth}}
+Content-Type: application/json
+
+{
+  "nombre": "Pedro",
+  "apellido": "Rodríguez",
+  "dia": "01/01/2024",
+  "sector": "interior",
+  "motivo": "Cena de cumpleaños"
+}
+
+### Crear reserva con sector inválido 
+POST {{baseUrl}}
+Authorization: {{auth}}
+Content-Type: application/json
+
+{
+  "nombre": "Laura",
+  "apellido": "Fernández",
+  "dia": "{{$datetime 'YYYY-MM-DD' +2 d}}",
+  "sector": "terraza",
+  "motivo": "Cena romántica"
+}
+
+### ========================================
+### ERRORES DE ID INEXISTENTE
+### ========================================
+
+### Obtener reserva con ID inexistente
+GET {{baseUrl}}/999999
+Authorization: {{auth}}
+
+### Actualizar reserva existente con fecha pasada 
+PUT {{baseUrl}}/1
+Authorization: {{auth}}
+Content-Type: application/json
+
+{
+  "nombre": "Juan",
+  "apellido": "Pérez",
+  "dia": "2020-01-01",
+  "sector": "interior",
+  "motivo": "Cena de aniversario"
+}
+
+### Eliminar reserva con ID inexistente
+DELETE {{baseUrl}}/999999
+Authorization: {{auth}}
+
+### ========================================
+### ERRORES DE RUTAS INEXISTENTES
+### ========================================
+
+### Intentar acceder a ruta inexistente
+GET {{baseUrl}}/ruta-inexistente
+Authorization: {{auth}}
+
+### ========================================
+### ERRORES DE DATOS MALFORMADOS
+### ========================================
+### Crear reserva con datos de tipo incorrecto
+POST {{baseUrl}}
+Authorization: {{auth}}
+Content-Type: application/json
+
+{
+  "nombre": 123,
+  "apellido": true,
+  "dia": "2024-01-20",
+  "sector": "interior",
+  "motivo": null
+}
+
+### Obtener reserva con ID inválido
+GET {{baseUrl}}/abc
+Authorization: {{auth}}
+
+### Obtener reserva con ID negativo
+GET {{baseUrl}}/-1
+Authorization: {{auth}}
+
+### Obtener reserva con ID cero
+GET {{baseUrl}}/0
+Authorization: {{auth}}

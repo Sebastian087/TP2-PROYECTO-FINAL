@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { ReservaController } from "../controller/reserva.controller.js";
 import { basicAuth } from "../middleware/basicAuth.js";
+import { validateReservaData, validateId } from "../middleware/validationMiddleware.js";
 
 const reservaRouter = Router();
 
@@ -14,9 +15,9 @@ reservaRouter.get("/logs", ReservaController.getLastLogs);
 
 // CRUD de reservas
 reservaRouter.get("/", ReservaController.reservaGetAll);
-reservaRouter.get("/:id", ReservaController.reservaGetById);
-reservaRouter.post("/", ReservaController.reservaCreateOne);
-reservaRouter.put("/:id", ReservaController.reservaUpdateById);
-reservaRouter.delete("/:id", ReservaController.reservaDeleteOne);
+reservaRouter.get("/:id", validateId, ReservaController.reservaGetById);
+reservaRouter.post("/", validateReservaData, ReservaController.reservaCreateOne);
+reservaRouter.put("/:id", validateId, validateReservaData, ReservaController.reservaUpdateById);
+reservaRouter.delete("/:id", validateId, ReservaController.reservaDeleteOne);
 
 export { reservaRouter }; 
