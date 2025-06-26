@@ -16,7 +16,7 @@ Este proyecto es una API RESTful construida con **Node.js + Express**, con persi
 │   ├── 📂 models           # Modelo Reserva
 │   ├── 📂 services         # Lógica intermedia entre controller y repositorio
 │   ├── 📂 repositories     # Acceso a Supabase (CRUD + logs)
-│   ├── 📂 middleware       # Middlewares: logger y auth
+│   ├── 📂 middleware       # Middlewares: logger, auth y validaciones.
 │   ├── 📂 config           # Configuraciones globales y variables de entorno
 │   ├── 📂 utils            # Exportador CSV
 │   ├── server.js          # Punto de entrada del servidor

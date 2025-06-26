@@ -31,7 +31,7 @@ export const validateReservaData = (req, res, next) => {
     } else {
       // Validar que la fecha no sea en el pasado
       const hoy = new Date();
-      hoy.setHours(0, 0, 0, 0); // Resetear a inicio del día
+      hoy.setHours(0, 0, 0, 0);
       if (fecha < hoy) {
         errors.push('No se pueden crear reservas para fechas pasadas');
       }
