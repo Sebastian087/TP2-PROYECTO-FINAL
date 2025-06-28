@@ -2,7 +2,7 @@
 
 ## 🌍 Resumen
 
-Este proyecto es una API RESTful construida con **Node.js + Express**, con persistencia de datos en **Supabase**. Permite gestionar un listado de reservas mediante operaciones CRUD, obtener estadísticas, exportar datos en CSV y está protegida por autenticación básica. Incluye middleware de logging y estructura modular siguiendo el patrón MVC.
+Este proyecto es una API RESTful construida con **Node.js + Express**, con persistencia de datos en **Supabase**, deployado en Rneder (https://tp2-proyecto-final.onrender.com). Permite gestionar un listado de reservas mediante operaciones CRUD, obtener estadísticas, exportar datos en CSV y está protegida por autenticación básica. Incluye middleware de logging y estructura modular siguiendo el patrón MVC.
 
 ---
 
@@ -98,7 +98,7 @@ Mide la duración de cada request y guarda un log en Supabase (tabla `logs`).
 
 ---
 
-## Testing Manual (`tests/reservas.http`) Tambien posee Despliegue en Render !!
+## Testing Manual (`tests/reservas.http`) Tambien posee Despliegue en Render (`test/production-test.http`) !!
 
 Se provee un archivo `.http` para realizar peticiones de prueba:
 
@@ -111,10 +111,6 @@ Se provee un archivo `.http` para realizar peticiones de prueba:
 > Puede usarse con la extensión REST Client de VSCode o herramientas como Insomnia/Postman.
 
 ---
-
-### Testing en Producción
-
-Usa `test/production_test.http` para probar el despliegue
 
 ## 🔹 Consideraciones Finales
 
@@ -147,6 +143,28 @@ NODE_ENV=test npm run dev
 - **Organization:** Trabajo Práctico THP 2
 - **Project Name:** Proyecto THP 2
 - **Region:** East US (Ohio)
+
+## En caso que se quiera migrar la base de datos se deja la la creacion de trablas SQL:
+
+-- Tabla de reservas
+CREATE TABLE reservas (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  nombre VARCHAR(100) NOT NULL,
+  apellido VARCHAR(100) NOT NULL,
+  dia DATE NOT NULL,
+  sector VARCHAR(50) NOT NULL,
+  motivo TEXT
+);
+
+-- Tabla de logs
+CREATE TABLE logs (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  method VARCHAR(10) NOT NULL,
+  url TEXT NOT NULL,
+  status_code INT4 NOT NULL,
+  response_time INT4 NOT NULL,
+  timestamp TIMESTAMPTZ DEFAULT NOW()
+);
 
 
 ## Integrantes
